@@ -10,12 +10,36 @@ const validUrlRegex =
 
 // const validUrlRegex = new RegExp(validUrl);
 
+const defaultAppSection = {
+  Home: [],
+  Streaming: [],
+  Games: [],
+  Utility: [],
+  Other: [],
+};
+
 function getLocalApps() {
   return JSON.parse(localStorage.getItem("apps")) || {};
 }
 
 function setLocalApps(updatedAppObj) {
-  return localStorage.setItem("apps", JSON.stringify(updatedAppObj));
+  localStorage.setItem("apps", JSON.stringify(updatedAppObj));
+  signalStorageUpdate();
+}
+
+function getLocalAppSections() {
+  const appSections = JSON.parse(localStorage.getItem("sections"));
+  if (!appSections) {
+    setLocalAppSection(defaultAppSection);
+    return defaultAppSection;
+  }
+
+  return appSections;
+}
+
+function setLocalAppSection(updatedAppObj) {
+  localStorage.setItem("sections", JSON.stringify(updatedAppObj));
+  signalStorageUpdate();
 }
 
 function signalStorageUpdate() {
@@ -38,7 +62,6 @@ function createOrUpdateApp(name, url, img, onClose) {
   setLocalApps(currApps);
   alert(isNewApp ? `Added ${name}!` : `${name} url or image was updated!`);
   !!onClose && onClose();
-  signalStorageUpdate();
 }
 
 function removeApp(name) {
@@ -69,7 +92,9 @@ function MainItem({ name, url, img }) {
     <div className="mainItem">
       <a href={url}>
         <div>
-          {img ? <img src={img} alt={name} className="img" /> : undefined}
+          {img ? (
+            <img src={img} alt={name} className="img" loading="lazy" />
+          ) : undefined}
           <p className="title">{name}</p>
         </div>
       </a>
@@ -80,6 +105,9 @@ function MainItem({ name, url, img }) {
 
 function App() {
   const [apps, setApps] = useState({});
+  const [appSections, setAppSections] = useState({});
+
+  const [activeSection, setActiveSection] = useState();
 
   const [itemName, setItemName] = useState("");
   const [itemUrl, setItemUrl] = useState("");
@@ -91,8 +119,10 @@ function App() {
 
     // Keep apps up to date
     function storageEventHandler() {
-      const apps = JSON.parse(localStorage.getItem("apps")) || {};
-      setApps(apps);
+      const a = getLocalApps();
+      const aSection = getLocalAppSections();
+      setApps(a);
+      setAppSections(aSection);
     }
 
     window.addEventListener("storage", storageEventHandler);
@@ -106,6 +136,12 @@ function App() {
     console.log("APP UDPATED");
     console.log(apps);
   }, [apps]);
+
+  useEffect(() => {
+    !activeSection &&
+      Object.keys(appSections).length > 0 &&
+      setActiveSection(Object.keys(appSections)[0]);
+  }, [activeSection]);
 
   const handleUrlInputFocus = (input, setInput) => {
     if (input.length === 0) {
@@ -128,8 +164,15 @@ function App() {
   return (
     <div className="app">
       <div className="sidebar">
-        {/* <h2>Sidebar</h2> */}
-        <SidebarItem name="Favorites" selected />
+        {Object.keys(appSections).map((section) => {
+          return (
+            <SidebarItem
+              name={section}
+              selected={section === activeSection}
+              onClick={() => setActiveSection(section)}
+            />
+          );
+        })}
         <div>
           <Popup
             trigger={
@@ -180,7 +223,7 @@ function App() {
                   <p className="modalNote">
                     Tap{" "}
                     <a
-                      href={`https://www.google.com/search?q=${itemName}+icon+transparent+png&tbm=isch&sclient=img`}
+                      href={`https://www.google.com/search?q=${itemName}+icon+transparent+png&tbm=isch&sclient=img&tbs=isz:m`}
                       target="__blank"
                     >
                       here
@@ -209,7 +252,18 @@ function App() {
         </div>
       </div>
       <div className="main">
-        {/* <h2>Main</h2> */}
+        <div className="webappNavBar">
+          <h3 className="webappTitle">The Best Theater</h3>
+          <div
+            onClick={() =>
+              window.location.replace(
+                `https://www.youtube.com/redirect?q=${window.location.href}`
+              )
+            }
+          >
+            Fullscreen
+          </div>
+        </div>
         {/* <p>Favorites</p> */}
         <div className="appsContainer">
           {Object.keys(apps).map((app) => {

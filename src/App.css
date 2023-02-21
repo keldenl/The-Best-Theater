@@ -1,179 +1,200 @@
-  @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
-  body {
-      font-family: 'Roboto', sans-serif;
-  }
-  
-   :root {
-      /* Spacing */
-      --spacerS: calc(var(--spacer) / 2);
-      --spacer: 5px;
-      --spacerL: calc(var(--spacer) * 2);
-      --spacerXL: calc(var(--spacer) * 4);
-      --spacerXXL: calc(var(--spacer) * 8);
-      /* Colors */
-      --primaryBlue: #3f69dd;
-      --borderGray: #aaa;
-  }
-  
-  #root {
-      width: 100vw;
-      height: 100vh;
-  }
-  /* Baes html element styling */
-  
-  input[type=text],
-  input[type=url] {
-      width: 100%;
-      /* background-color: #d3d4cf; */
-      background-color: transparent;
-      border: 2px solid var(--borderGray);
-      /* background-color: var(--borderGray); */
-      border-radius: var(--spacer);
-      margin: var(--spacer) 0;
-      outline: none;
-      padding: var(--spacerL);
-      box-sizing: border-box;
-      transition: .3s;
-  }
-  
-  button {
-      border: none;
-      color: white;
-      padding: var(--spacerL) var(--spacerXXL);
-      text-align: center;
-      text-decoration: none;
-      display: inline-block;
-      transition-duration: 0.4s;
-      cursor: pointer;
-      border-radius: 5px;
-      background-color: var(--primaryBlue);
-      font-weight: bold;
-  }
-  
-  button:disabled {
-      background-color: var(--borderGray);
-  }
-  
-  .block {
-      display: block;
-      width: 100%;
-  }
-  
-  input[type=text]:focus,
-  input[type=url]:focus {
-      background-color: #f3f4f1;
-      border-color: var(--primaryBlue);
-      box-shadow: 0 0 var(--spacer) 0 var(--primaryBlue);
-  }
-  
-  .app {
-      display: flex;
-      height: 100%;
-      background-color: #d3d4cf;
-  }
-  
-  .sidebar,
-  .main {
-      padding: var(--spacerXL);
-  }
-  
-  .sidebar {
-      /* margin-right: var(--spacerL); */
-  }
-  
-  .sidebarItem {
-      padding: var(--spacerL) var(--spacerXL);
-      margin-bottom: 10px;
-      border-radius: 5px;
-      font-weight: 500;
-      min-width: 150px;
-      background: transparent;
-      box-shadow: unset;
-      color: gray;
-  }
-  
-  .sidebarItem>p {
-      margin: 0;
-      padding: 0;
-  }
-  
-  .sidebarItem.selected {
-      background: #fff;
-      box-shadow: 0 10px 20px 0px rgb(0 0 0 / 5%), 0px 6px 10px rgb(0 0 0 / 2%);
-      color: #333;
-  }
-  
-  .main {
-      flex-grow: 2;
-      display: flex;
-      flex-direction: column;
-  }
-  
-  .appsContainer {
-      display: inline-grid;
-      justify-content: center;
-      align-items: start;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-  }
-  
-  .mainItem {
-      border-radius: 10px;
-      border: 2px solid #aaa;
-      text-align: center;
-      height: 100%;
-      padding: var(--spacerL);
-  }
-  
-  .mainItem a {
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      text-decoration: none;
-      color: #666;
-  }
-  
-  .mainItem .img {
-      max-width: 100px;
-      height: 75px;
-  }
-  
-  .mainItem .title {
-      font-weight: 600;
-      font-size: 1.5em;
-      margin: 0;
-      margin-top: var(--spacerL);
-  }
-  /* Override popup modal styling */
-  
-  .popup-content {
-      padding: 0 var(--spacerL);
-      background-color: #d3d4cf;
-      border-radius: 5px;
-  }
-  
-  .modalHeader {
-      display: flex;
-      align-items: center;
-      border-bottom: 1px solid var(--borderGray);
-  }
-  
-  .modalHeader .title {
-      flex-grow: 2;
-      text-align: center;
-      font-weight: bold;
-  }
-  
-  .modalContent {
-      margin-top: var(--spacerL);
-      padding: 0 5px;
-      padding-bottom: var(--spacerXL);
-  }
-  
-  .modalNote {
-      font-size: 0.85em;
-      color: #333;
-      margin: 5px;
-      margin-bottom: 20px;
-  }
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+:root {
+    /* Spacing */
+    --spacerS: calc(var(--spacer) / 2);
+    --spacer: 5px;
+    --spacerL: calc(var(--spacer) * 2);
+    --spacerXL: calc(var(--spacer) * 4);
+    --spacerXXL: calc(var(--spacer) * 8);
+    /* Colors */
+    --primaryBlue: #3f69dd;
+    --borderGray: #aaa;
+}
+
+#root {
+    width: 100vw;
+    height: 100vh;
+}
+
+
+/* Baes html element styling */
+
+input[type=text],
+input[type=url] {
+    width: 100%;
+    /* background-color: #d3d4cf; */
+    background-color: transparent;
+    border: 2px solid var(--borderGray);
+    /* background-color: var(--borderGray); */
+    border-radius: var(--spacer);
+    margin: var(--spacer) 0;
+    outline: none;
+    padding: var(--spacerL);
+    box-sizing: border-box;
+    transition: .3s;
+}
+
+button {
+    border: none;
+    color: white;
+    padding: var(--spacerL) var(--spacerXXL);
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: var(--primaryBlue);
+    font-weight: bold;
+}
+
+button:disabled {
+    background-color: var(--borderGray);
+}
+
+.block {
+    display: block;
+    width: 100%;
+}
+
+input[type=text]:focus,
+input[type=url]:focus {
+    background-color: #f3f4f1;
+    border-color: var(--primaryBlue);
+    box-shadow: 0 0 var(--spacer) 0 var(--primaryBlue);
+}
+
+.app {
+    display: flex;
+    height: 100%;
+    background-color: #d3d4cf;
+}
+
+.webappNavBar {
+    padding: var(--spacer);
+    margin-bottom: var(--spacerXL);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.webappTitle {
+    margin: 0;
+    color: #666;
+    font-weight: 600;
+    font-size: 1.25em;
+}
+
+.sidebar,
+.main {
+    padding: var(--spacerXL);
+}
+
+.sidebar {
+    /* margin-right: var(--spacerL); */
+}
+
+.sidebarItem {
+    padding: var(--spacerL) var(--spacerXL);
+    margin-bottom: 10px;
+    border-radius: 5px;
+    font-weight: 500;
+    min-width: 150px;
+    background: transparent;
+    box-shadow: unset;
+    color: gray;
+    transition: 0.15s all ease-in-out;
+    cursor: pointer;
+}
+
+.sidebarItem>p {
+    margin: 0;
+    padding: 0;
+}
+
+.sidebarItem.selected {
+    background: #fff;
+    box-shadow: 0 10px 20px 0px rgb(0 0 0 / 5%), 0px 6px 10px rgb(0 0 0 / 2%);
+    color: #333;
+}
+
+.main {
+    flex-grow: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.appsContainer {
+    display: inline-grid;
+    justify-content: center;
+    align-items: start;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.mainItem {
+    border-radius: 10px;
+    border: 2px solid #aaa;
+    text-align: center;
+    height: 100%;
+    padding: var(--spacerL);
+}
+
+.mainItem a {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-decoration: none;
+    color: #666;
+}
+
+.mainItem .img {
+    max-width: 100px;
+    height: 75px;
+}
+
+.mainItem .title {
+    font-weight: 500;
+    font-size: 1.5em;
+    margin: 0;
+    margin-top: var(--spacerL);
+}
+
+
+/* Override popup modal styling */
+
+.popup-content {
+    padding: 0 var(--spacerL);
+    background-color: #d3d4cf;
+    border-radius: 5px;
+}
+
+.modalHeader {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid var(--borderGray);
+}
+
+.modalHeader .title {
+    flex-grow: 2;
+    text-align: center;
+    font-weight: bold;
+}
+
+.modalContent {
+    margin-top: var(--spacerL);
+    padding: 0 5px;
+    padding-bottom: var(--spacerXL);
+}
+
+.modalNote {
+    font-size: 0.85em;
+    color: #333;
+    margin: 5px;
+    margin-bottom: 20px;
+}
