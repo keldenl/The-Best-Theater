@@ -53,9 +53,12 @@ function removeApp(name) {
   }
 }
 
-function SidebarItem({ name, onClick }) {
+function SidebarItem({ name, onClick, selected = false }) {
   return (
-    <div onClick={onClick}>
+    <div
+      className={`sidebarItem ${selected ? "selected" : ""}`}
+      onClick={onClick}
+    >
       <p>{name}</p>
     </div>
   );
@@ -67,10 +70,10 @@ function MainItem({ name, url, img }) {
       <a href={url}>
         <div>
           {img ? <img src={img} alt={name} className="img" /> : undefined}
-          <p>{name}</p>
+          <p className="title">{name}</p>
         </div>
       </a>
-      <button onClick={() => removeApp(name)}>Remove</button>
+      {/* <button onClick={() => removeApp(name)}>Remove</button> */}
     </div>
   );
 }
@@ -125,8 +128,8 @@ function App() {
   return (
     <div className="app">
       <div className="sidebar">
-        <h2>Sidebar</h2>
-        <SidebarItem name="Favorites" />
+        {/* <h2>Sidebar</h2> */}
+        <SidebarItem name="Favorites" selected />
         <div>
           <Popup
             trigger={
@@ -149,13 +152,13 @@ function App() {
                     id="itemName"
                     type="text"
                     value={itemName}
-                    placeholder="App Name"
+                    placeholder="App Name*"
                     onChange={(e) => setItemName(e.target.value)}
                   />
                   <input
                     type="url"
                     value={itemUrl}
-                    placeholder="App URL"
+                    placeholder="App URL*"
                     onChange={(e) => setItemUrl(e.target.value)}
                     onFocus={() => handleUrlInputFocus(itemUrl, setItemUrl)}
                     onBlur={() => handleUrlInputBlur(itemUrl, setItemUrl)}
@@ -206,7 +209,7 @@ function App() {
         </div>
       </div>
       <div className="main">
-        <h2>Main</h2>
+        {/* <h2>Main</h2> */}
         {/* <p>Favorites</p> */}
         <div className="appsContainer">
           {Object.keys(apps).map((app) => {
