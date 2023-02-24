@@ -18,8 +18,37 @@ const defaultAppSection = {
   Other: [],
 };
 
+const defaultApps = {
+  Youtube: {
+    url: "https://www.youtube.com",
+    img: "https://assets.stickpng.com/thumbs/580b57fcd9996e24bc43c545.png",
+  },
+  Netflix: {
+    url: "https://www.netflix.com",
+    img: "https://www.freepnglogos.com/uploads/netflix-logo-circle-png-5.png",
+  },
+  Crunchyroll: {
+    url: "https://www.crunchyroll.com",
+    img: "https://assets.stickpng.com/images/61362684f5966900044cbf73.png",
+  },
+  'Xbox Cloud Gaming': {
+    url: "https://www.xbox.com/en-us/play",
+    img: "https://www.freeiconspng.com/thumbs/xbox-icon/xbox-logo-icon-5.png",
+  },
+  Reddit: {
+    url: "https://www.reddit.com/",
+    img: "https://external-preview.redd.it/iDdntscPf-nfWKqzHRGFmhVxZm4hZgaKe5oyFws-yzA.png?auto=webp&s=38648ef0dc2c3fce76d5e1d8639234d8da0152b2",
+  },
+};
+
 function getLocalApps() {
-  return JSON.parse(localStorage.getItem("apps")) || {};
+  const apps = JSON.parse(localStorage.getItem("apps"));
+  if (!apps) {
+    setLocalApps(defaultApps);
+    return defaultApps;
+  }
+
+  return apps;
 }
 
 function setLocalApps(updatedAppObj) {
@@ -141,7 +170,7 @@ function App() {
     !activeSection &&
       Object.keys(appSections).length > 0 &&
       setActiveSection(Object.keys(appSections)[0]);
-  }, [activeSection]);
+  }, [activeSection, appSections]);
 
   const handleUrlInputFocus = (input, setInput) => {
     if (input.length === 0) {
@@ -223,7 +252,7 @@ function App() {
                   <p className="modalNote">
                     Tap{" "}
                     <a
-                      href={`https://www.google.com/search?q=${itemName}+icon+transparent+png&tbm=isch&sclient=img&tbs=isz:m`}
+                      href={`https://www.google.com/search?q=${itemName}+icon+transparent+png&tbm=isch&sclient=img&tbs=ic:trans%2Cisz:m`}
                       target="__blank"
                     >
                       here
@@ -270,9 +299,8 @@ function App() {
             const { url, img } = apps[app];
             return <MainItem key={app} name={app} url={url} img={img} />;
           })}
-          <MainItem name="Crunchyroll" url="https://www.crunchyroll.com" />
         </div>
-        {/* <button onClick={() => localStorage.clear()}>Nuke Local Storage</button> */}
+        <button onClick={() => localStorage.clear()}>Nuke Local Storage</button>
       </div>
     </div>
   );

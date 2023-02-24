@@ -1,4 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
 }
@@ -76,7 +82,7 @@ input[type=url]:focus {
 
 .webappNavBar {
     padding: var(--spacer);
-    margin-bottom: var(--spacerXL);
+    margin-bottom: var(--spacer);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -134,6 +140,7 @@ input[type=url]:focus {
     align-items: start;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
+    margin: var(--spacerXL) 0;
 }
 
 .mainItem {
@@ -141,7 +148,7 @@ input[type=url]:focus {
     border: 2px solid #aaa;
     text-align: center;
     height: 100%;
-    padding: var(--spacerL);
+    padding: var(--spacerXL) var(--spacer);
 }
 
 .mainItem a {
