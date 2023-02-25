@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/The-Best-Theater/static/css/main.178fd6cf.css",
-    "main.js": "/The-Best-Theater/static/js/main.d9a74cf9.js",
+    "main.css": "/The-Best-Theater/static/css/main.209c9bd3.css",
+    "main.js": "/The-Best-Theater/static/js/main.db2ea321.js",
     "static/js/787.d3308959.chunk.js": "/The-Best-Theater/static/js/787.d3308959.chunk.js",
     "index.html": "/The-Best-Theater/index.html",
-    "main.178fd6cf.css.map": "/The-Best-Theater/static/css/main.178fd6cf.css.map",
-    "main.d9a74cf9.js.map": "/The-Best-Theater/static/js/main.d9a74cf9.js.map",
+    "main.209c9bd3.css.map": "/The-Best-Theater/static/css/main.209c9bd3.css.map",
+    "main.db2ea321.js.map": "/The-Best-Theater/static/js/main.db2ea321.js.map",
     "787.d3308959.chunk.js.map": "/The-Best-Theater/static/js/787.d3308959.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.178fd6cf.css",
-    "static/js/main.d9a74cf9.js"
+    "static/css/main.209c9bd3.css",
+    "static/js/main.db2ea321.js"
   ]
 }
